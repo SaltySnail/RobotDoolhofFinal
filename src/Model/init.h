@@ -4,8 +4,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-
-#define TV_OFFSET  
 #define TV_WIDTH 3840
 #define TV_HEIGHT 2160
 #define MON_WIDTH  2560
