@@ -2,8 +2,8 @@
 
 void model::robot::init(SDL_Renderer *renderer, maze *yourMaze) {
 	txtr = IMG_LoadTexture(renderer, TXTR_ROBOT);
-	location.x = 0;//start.x*ROOM_SIZE;
-	location.y = 0;//start.y*ROOM_SIZE;
+	location.x = 0;
+	location.y = 0;
 	myMaze = yourMaze;
 	weight_counter = 0;
 	SDL_Point tmp;
@@ -39,14 +39,13 @@ void model::robot::turn(float degrees) {
 			direction = turning_right;
 		else 
 			direction = turning_left;
-		if ((int)angle == (int)desired_angle || (int)(sqrt((angle) * (angle))) == (int)(sqrt(desired_angle * desired_angle))) { //|| (int)(sqrt((angle+360) * (angle+360))) == (int)(sqrt(desired_angle * desired_angle))) {
+		if ((int)angle == (int)desired_angle || (int)(sqrt((angle) * (angle))) == (int)(sqrt(desired_angle * desired_angle))) { 
 			(void)desired_angle;
 			angle = (int)angle;
 			turning = false;
 			driving = true;
 		}
 		else {
-			//printf("\t\tangle: %.2f \t desired_angle: %.2f\n", angle, desired_angle);	
 			if (direction == turning_left) {	
 				angle -= ROBOT_TURN_SPEED;
 			}
@@ -68,22 +67,17 @@ void model::robot::setDesiredDegrees() { //deze eerst
 	tmp.y = counter.y;
 	setCurrentRoom();
 	thePath.getNextRoom(&counter, &weight_counter);
-	//printf("Got the next room boss: %d, %d\n", counter.x, counter.y);
 	if (counter.x > tmp.x) { 
 		desired_angle = degreesRight; 
-		//printf("I chose right, with angle %.2f\n", desired_angle);
 	}
 	if (counter.y > tmp.y) {
 		desired_angle = degreesBottom;
-		//printf("I chose bottom, with angle %.2f\n", desired_angle);
 	}
 	if (counter.x < tmp.x) {
 		desired_angle = degreesLeft;
-		//printf("I chose left, with angle %.2f\n", desired_angle);
 	}
 	if (counter.y < tmp.y){
 		desired_angle = degreesTop;
-		//printf("I chose top, with angle %.2f\n", desired_angle);
 	}
 		turning = true;
 	}	
@@ -94,7 +88,6 @@ void model::robot::drive(float speed) { //dan deze
 		location.x += speed*cos((angle+90)*M_PI/180);
 		location.y += speed*sin((angle+90)*M_PI/180);
 		if (location.x == counter.x*ROOM_SIZE && location.y == counter.y*ROOM_SIZE) {
-		//if (location.x/ROOM_SIZE == (int)(location.x/ROOM_SIZE) && location.y/ROOM_SIZE == (int)(location.y*ROOM_SIZE)) {
 			driving = false;
 		}
 	}
@@ -112,20 +105,21 @@ void model::robot::update(void) {
 	if (!path_init) {
 		thePath.init(myMaze);
 		path_init = true;
+		finished = false;
+		driving = false;
+		turning = false;
 	}
 	if (!finished) {
-	 //&& counter.y < SCREEN_HEIGHT/ROOM_SIZE) {
 		if (!driving) {	
+			//printf("Where to go boss\n"); 
 			finished = thePath.isFinished(counter);
 			setDesiredDegrees();
 		}
 		if (turning) {
 			turn(0);
-			//printf("turning\n");
 		}
 		if (driving) {
 			drive(ROBOT_SPEED);
-			//printf("driving\n");
 		}
 	} else {
 		angle++;

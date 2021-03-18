@@ -49,7 +49,8 @@ void model::node::setWeightOpening(int *weight_counter, sides Side) {
 }
 
 void model::node::setWeightBacktracking(sides currentRoomWeight) {
-	switch (currentRoomWeight) {
+	weight[currentRoomWeight] = INT_MAX;
+	/*switch (currentRoomWeight) {
 		case top:
 			weight[top] = INT_MAX;
 			//setWeightBacktrackingPrevNode(bottom);
@@ -64,10 +65,11 @@ void model::node::setWeightBacktracking(sides currentRoomWeight) {
 			//setWeightBacktrackingPrevNode(left);
 		default:
 			break;
-	}	
+	}	*/
 }
 void model::node::setWeightBacktrackingPrevNode(sides currentRoomWeight) { 
-	switch (currentRoomWeight) {
+	weight[currentRoomWeight] = INT_MAX;
+	/*switch (currentRoomWeight) {
 		case top:
 			weight[top] = INT_MAX;
 		case bottom:
@@ -78,11 +80,12 @@ void model::node::setWeightBacktrackingPrevNode(sides currentRoomWeight) {
 			weight[right] = INT_MAX;
 		default:
 			break;
-	}
+	}*/
 }
 
 int model::node::getWeight(sides theSide) {
-	switch (theSide) {
+	return weight[theSide];
+	/*switch (theSide) {
 		case top:
 			return weight[top];
 		case bottom:
@@ -94,7 +97,7 @@ int model::node::getWeight(sides theSide) {
 		default:
 			break;
 	}
-	return INT_MAX; //zou nooit moeten gebeuren
+	return INT_MAX; //zou nooit moeten gebeuren*/
 }
 
 void model::node::setMissingWalls() {

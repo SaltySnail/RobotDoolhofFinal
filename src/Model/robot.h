@@ -24,7 +24,7 @@ namespace model {
 			SDL_Point location;
 			SDL_Texture *txtr;
 			float angle, desired_angle;
-			bool turning, driving, path_init, finished;
+			bool turning, driving, path_init, finished = 0;
 			room *current_room;
 			path thePath;
 			directions direction;

@@ -7,10 +7,10 @@ CC := g++
 CPPFLAGS := -std=c++17 -Wall -Wpedantic `sdl2-config --cflags --libs` -lSDL2_image -lm -I include/
 
 # add header files here
-HDRS :=
+HDRS := Model/simulation.h
 
 # add source files here
-SRCS := main.cpp Model/init.cpp Model/maze.cpp Model/room.cpp Model/robot.cpp Model/input.cpp Model/path.cpp Model/node.cpp
+SRCS := main.cpp Model/init.cpp Model/maze.cpp Model/room.cpp Model/robot.cpp Model/input.cpp Model/path.cpp Model/node.cpp View/simulation.cpp Controller/simulation.cpp Model/simulation.cpp
 
 # generate names of object files
 OBJS := $(SRCS:.cpp=.o)

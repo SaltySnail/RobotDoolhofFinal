@@ -48,6 +48,7 @@ void model::path::getNextRoom(SDL_Point *counter, int *weight_counter) {
 
 		}
 	}
+
 	if (weight[top] != INT_MAX && weight[top] == min_weight && 
 	    counter->y > 0) {
 		counter->y--;
@@ -56,7 +57,6 @@ void model::path::getNextRoom(SDL_Point *counter, int *weight_counter) {
 		*weight_counter += 2;
 		nodes[counter->x][counter->y].setWeightOpening(weight_counter, bottom);	
 		*weight_counter -= 1;
-
 	}
 	else if (weight[right] != INT_MAX && weight[right] == min_weight && 
     		counter->x < SCREEN_WIDTH/ROOM_SIZE) {
@@ -66,7 +66,6 @@ void model::path::getNextRoom(SDL_Point *counter, int *weight_counter) {
 		*weight_counter += 2;
 		nodes[counter->x][counter->y].setWeightOpening(weight_counter, left);	
 		*weight_counter -= 1;
-	
 	}
 	else if (weight[left] != INT_MAX && weight[left] == min_weight && 
 	    counter->x > 0) {

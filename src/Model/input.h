@@ -7,7 +7,7 @@ namespace model {
 	class input {
 			SDL_Event event;
 		public:
-			SDL_bool update(void);
+			bool update(void);
 		};
 }
 
