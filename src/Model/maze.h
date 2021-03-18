@@ -5,7 +5,7 @@
 #include "init.h"
 
 #if SCREEN_WIDTH == TV_WIDTH
-	#define ROOM_SIZE 30
+	#define ROOM_SIZE 20
 #else
 	#define ROOM_SIZE 32
 #endif

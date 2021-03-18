@@ -13,7 +13,7 @@ void model::init::sdl(SDL_Window **window, SDL_Renderer **renderer)
 	}
 	if (SCREEN_WIDTH == TV_WIDTH) {
 	*window = SDL_CreateWindow("Robots go brrrr", 
-		MON_WIDTH*2, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, 
+		MON_WIDTH*2, TV_HEIGHT/2, SCREEN_WIDTH, 
 		SCREEN_HEIGHT, window_flags);
 	} else {
 	*window = SDL_CreateWindow("Robots go brrrr", 

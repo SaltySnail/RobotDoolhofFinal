@@ -5,7 +5,7 @@
 #include "path.h"
 
 #if SCREEN_WIDTH == TV_WIDTH
-	#define ROBOT_ZOOM -14
+	#define ROBOT_ZOOM -16
 #else
 	#define ROBOT_ZOOM -12
 #endif

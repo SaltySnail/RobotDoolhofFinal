@@ -112,7 +112,6 @@ void model::robot::update(void) {
 	if (!finished) {
 		if (!driving) {	
 			//printf("Where to go boss\n"); 
-			finished = thePath.isFinished(counter);
 			setDesiredDegrees();
 		}
 		if (turning) {
@@ -120,6 +119,9 @@ void model::robot::update(void) {
 		}
 		if (driving) {
 			drive(ROBOT_SPEED);
+			if (!driving) {
+				finished = thePath.isFinished(counter);
+			}
 		}
 	} else {
 		angle++;

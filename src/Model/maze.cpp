@@ -104,11 +104,13 @@ SDL_Point model::maze::getEnd(void) {
 
 void model::maze::stupidlyCorrectBorders(SDL_Renderer *renderer) {
 	SDL_Point line[2];
-	int offset;
+	int offset = 0;//, weird_offset = 0;
 	if (SCREEN_WIDTH == TV_WIDTH) {
-		offset = 3;
+		offset = 1;//3;
+		weird_offset = 4; 
 	} else {
 		offset = 1;
+		weird_offset = 1; 
 	}
 	line[0].x = SCREEN_WIDTH-offset; //rechts
 	line[0].y = SCREEN_HEIGHT-offset;
@@ -116,12 +118,41 @@ void model::maze::stupidlyCorrectBorders(SDL_Renderer *renderer) {
 	line[1].y = 0;
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //RGBA
 	SDL_RenderDrawLines(renderer, line, 2);
-	line[0].x = 0;
-	line[0].y = SCREEN_HEIGHT-offset;
+
+	line[0].x = 0; //onder
+	line[0].y = SCREEN_HEIGHT-offset;//-weird_offset;
 	line[1].x = SCREEN_WIDTH-ROOM_SIZE-offset;
-	line[1].y = SCREEN_HEIGHT-offset;
+	line[1].y = SCREEN_HEIGHT-offset;//-weird_offset;
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //RGBA
 	SDL_RenderDrawLines(renderer, line, 2);
+
+	line[0].x = ROOM_SIZE; //boven
+	line[0].y = 0;
+	line[1].x = SCREEN_WIDTH-offset;
+	line[1].y = 0;
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //RGBA
+	SDL_RenderDrawLines(renderer, line, 2);
+	
+	if (SCREEN_WIDTH == TV_WIDTH) { 
+	//manjaro kan geen 4k, of LG cx is niet echt 4K, of OLED pixel shift verpest het, of het coordinaten systeem is zojuist in de soep gelopen (eerst deed hij het zonder deze rare dingen).
+	//Een andere mogelijke oorzaak is X11 die de schermen aan elkaar naait.
+	//of simplescreenrecorder is de boosdoener
+	//of SDL maakt niet altijd de window op dezelfde positie aan
+	line[0].x = ROOM_SIZE; //boven
+	line[0].y = offset;
+	line[1].x = SCREEN_WIDTH-offset;
+	line[1].y = offset;
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //RGBA
+	SDL_RenderDrawLines(renderer, line, 2);
+	
+
+	line[0].x = offset; //links
+	line[0].y = 0;//offset;
+	line[1].x = offset;
+	line[1].y = SCREEN_HEIGHT;
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //RGBA
+	SDL_RenderDrawLines(renderer, line, 2);
+	}
 }
 
 model::room *model::maze::getRoomByCoords(SDL_Point coords) {
