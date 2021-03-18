@@ -104,16 +104,22 @@ SDL_Point model::maze::getEnd(void) {
 
 void model::maze::stupidlyCorrectBorders(SDL_Renderer *renderer) {
 	SDL_Point line[2];
-	line[0].x = SCREEN_WIDTH-1; //rechts
-	line[0].y = SCREEN_HEIGHT-1;
-	line[1].x = SCREEN_WIDTH-1;
+	int offset;
+	if (SCREEN_WIDTH == TV_WIDTH) {
+		offset = 3;
+	} else {
+		offset = 1;
+	}
+	line[0].x = SCREEN_WIDTH-offset; //rechts
+	line[0].y = SCREEN_HEIGHT-offset;
+	line[1].x = SCREEN_WIDTH-offset;
 	line[1].y = 0;
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //RGBA
 	SDL_RenderDrawLines(renderer, line, 2);
 	line[0].x = 0;
-	line[0].y = SCREEN_HEIGHT-1;
-	line[1].x = SCREEN_WIDTH-ROOM_SIZE-1;
-	line[1].y = SCREEN_HEIGHT-1;
+	line[0].y = SCREEN_HEIGHT-offset;
+	line[1].x = SCREEN_WIDTH-ROOM_SIZE-offset;
+	line[1].y = SCREEN_HEIGHT-offset;
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //RGBA
 	SDL_RenderDrawLines(renderer, line, 2);
 }

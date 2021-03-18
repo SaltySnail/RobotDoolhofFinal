@@ -4,7 +4,11 @@
 #include "maze.h"
 #include "path.h"
 
-#define ROBOT_ZOOM -12
+#if SCREEN_WIDTH == TV_WIDTH
+	#define ROBOT_ZOOM -14
+#else
+	#define ROBOT_ZOOM -12
+#endif
 #define ROBOT_SPEED 2
 #define ROBOT_TURN_SPEED 5
 

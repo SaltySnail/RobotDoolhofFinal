@@ -4,9 +4,14 @@
 #include "room.h"
 #include "init.h"
 
-#define ROOM_SIZE 32
-//Mogelijke sizes op 2560x1440: 1, 2,4,5,8,10,16,20,32,40,80,160
+#if SCREEN_WIDTH == TV_WIDTH
+	#define ROOM_SIZE 30
+#else
+	#define ROOM_SIZE 32
+#endif
 
+//Mogelijke sizes op 2560x1440: 1, 2,4,5,8,10,16,20,32,40,80,160
+//Mogelijke sizes op 3840x2160: 1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 16, 20, 24, 30, 40, 48, 60, 80, 120, 240
 
 namespace model {
 	class maze {
